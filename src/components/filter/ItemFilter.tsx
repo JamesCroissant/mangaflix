@@ -6,27 +6,29 @@ import { KeywordFilter } from "./KeywordFilter"
 import { ResetButton } from "./ResetButton"
 import { SortField } from "./SortField"
 
+
 const ItemFilter = () => {
 
   return (
     <>
-      <div>
-        <div className="item-filter">
+      <div className="flex flex-col items-center">
+        <div className="mb-10 w-[400px]">
           <KeywordFilter />
-          <div className="grid grid-cols-2">
-            <div>
+          <div className="grid grid-cols-3 my-5">
+            <div className="flex flex-col items-center">
               <GenreFilter />
             </div>
-            <div>
+            <div className="flex flex-col items-center">
               <CategoryFilter />
             </div>
-            <div>
+            <div className="flex flex-col items-center">
               <SortField/>
             </div>
           </div>
           <ResetButton/>
         </div>
       </div>
+      
     </>
   );
 };
