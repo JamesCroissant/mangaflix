@@ -3,32 +3,39 @@
 import { CategoryFilter } from "./CategoryFilter"
 import { GenreFilter } from "./GenreFilter"
 import { KeywordFilter } from "./KeywordFilter"
-import { ResetButton } from "./ResetButton"
 import { SortField } from "./SortField"
 
 const ItemFilter = () => {
 
   return (
     <>
-      <div>
-        <div className="item-filter">
-          <KeywordFilter />
-          <div className="grid grid-cols-2">
-            <div>
-              <GenreFilter />
-            </div>
-            <div>
-              <CategoryFilter />
-            </div>
-            <div>
-              <SortField/>
-            </div>
-          </div>
-          <ResetButton/>
+      <div className="flex flex-col justify-center mb-10">
+        <div className="relative flex justify-center">
+          <KeywordFilter/>
         </div>
+        <div className="flex flex-col justify-center">
+          <div className="flex flex-col gap-y-4 items-center md:flex-row md:justify-center gap-x-4 mt-8 mb-9">
+              <GenreFilter />
+              <CategoryFilter />
+              <SortField/>
+          </div>
+        </div>
+        
       </div>
+      
     </>
   );
 };
 
 export default ItemFilter
+
+
+{/* <div className="flex flex-col items-center">
+              <GenreFilter />
+            </div>
+            <div className="flex flex-col items-center">
+              <CategoryFilter />
+            </div>
+            <div className="flex flex-col items-center">
+              <SortField/>
+            </div> */}
