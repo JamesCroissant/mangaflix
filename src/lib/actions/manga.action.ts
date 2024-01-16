@@ -32,7 +32,7 @@ export async function getAllMangas({ query, genre, category, sort }: GetAllManga
     } else if (sort === 'descending') {
       filteredManga.sort((a, b) => b.title.localeCompare(a.title));
     }
-
+    
     return filteredManga
 
   } catch (error) {
