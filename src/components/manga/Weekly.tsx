@@ -34,7 +34,7 @@ export function Weekly({ mangas }: WeeklyProps) {
                   <Card>
                     <CardContent className="flex aspect-square items-center justify-center p-6">
                       <span className="text-3xl font-semibold">
-                        {manga.category === "trending" &&  manga.imgPath}
+                        {manga.category.toLowerCase() === "trending" &&  manga.imgPath}
                       </span>
                     </CardContent>
                   </Card>
