@@ -45,7 +45,7 @@ const CategoryButton = () => {
             value={category}
             variant="stable"
             onClick={() => onSelectCategory(category)}
-            className={`${searchParams.get("category") === category && "rounded-full text-white bg-orange-500"} `}
+            className={`${searchParams.get("category") === category.toLowerCase() && "rounded-full text-white bg-orange-500"} `}
           >
             {category}
           </Button>
