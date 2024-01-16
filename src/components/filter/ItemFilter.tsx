@@ -20,7 +20,6 @@ const ItemFilter = () => {
               <SortField/>
           </div>
         </div>
-        
       </div>
       
     </>
@@ -28,14 +27,3 @@ const ItemFilter = () => {
 };
 
 export default ItemFilter
-
-
-{/* <div className="flex flex-col items-center">
-              <GenreFilter />
-            </div>
-            <div className="flex flex-col items-center">
-              <CategoryFilter />
-            </div>
-            <div className="flex flex-col items-center">
-              <SortField/>
-            </div> */}
