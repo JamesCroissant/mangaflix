@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 
-
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { FaUser } from "react-icons/fa6";
@@ -13,7 +12,6 @@ import { Manga } from '@/data/manga';
 type MangaCardProps = {
   manga: Manga;
 }
-
 
 export function MangaCard({ manga }: MangaCardProps) {
 

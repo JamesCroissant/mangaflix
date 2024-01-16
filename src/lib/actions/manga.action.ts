@@ -20,8 +20,10 @@ export async function getAllMangas({ query, genre, category, sort }: GetAllManga
     }
 
     // category
-    if (category) {
+    if (category === 'popular' || category === 'trending') {
       filteredManga = filteredManga.filter(manga => manga.category.toLowerCase() === category);
+    } else if (category === 'ranking') {
+      filteredManga = filteredManga.sort((a, b) => b.rating - a.rating);
     }
 
     // sorting
@@ -30,6 +32,7 @@ export async function getAllMangas({ query, genre, category, sort }: GetAllManga
     } else if (sort === 'descending') {
       filteredManga.sort((a, b) => b.title.localeCompare(a.title));
     }
+    
     return filteredManga
 
   } catch (error) {
