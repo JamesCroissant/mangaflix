@@ -15,7 +15,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
   const category = (searchParams?.category as string) || '';
   const sort = (searchParams?.sort as string) || '';
 
-  const trendingMangas = mangas.filter(manga => manga.category === "trending");
+  const trendingMangas = mangas.filter(manga => manga.category === "Trending");
 
   const filterdMangas = await getAllMangas({
     query: keywordText,
