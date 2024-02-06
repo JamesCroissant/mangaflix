@@ -1,20 +1,40 @@
-import NavBottomBar from "./NavBottomBar"
-import NavTopBar from "./NavTopBar"
+"use client"
 
-const Navbar = () => {
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+
+import { FiSearch } from "react-icons/fi";
+import { UserMenu } from '@/components/layout/UserMenu';
+
+import { SafeUser } from "@/types";
+
+
+type navbarProps = {
+  currentUser?: SafeUser | null;
+};
+
+const Navbar:React.FC<navbarProps> = ({ currentUser }) => {
+  const currentPath = usePathname()
+
   return (
     <>
       <div className="fixed w-full bg-white z-10 shadow-sm">
         <div className="py-3 border-b-[1px] flex justify-evenly">
-          <h1 className="text-2xl font-semibold text-center md:text-left text-orange-500">Manga Flix</h1>
-          <div className="hidden md:flex">
-            <NavTopBar />
-          </div>
-        </div>
-      </div>
-      <div className="md:hidden fixed bottom-0 bg-white z-10 w-full">
-        <div className="flex border-b-[1px] shadow-inner justify-center p-4 md:p-0">
-          <NavBottomBar/>
+          <Link href="/">
+            <h1 className="text-2xl font-semibold text-left text-orange-500">
+              Manga Flix
+            </h1>
+          </Link>
+          <nav className="flex gap-6 items-center">
+            <Link
+              key='/search'
+              className={`${currentPath === "/search" ? "text-orange-500" : "text-zinc-500"} hover:text-orange-600 transition-colors`}
+              href="/search"
+            >
+              <FiSearch /> 
+            </Link>
+            <UserMenu currentUser={currentUser} />
+          </nav>          
         </div>
       </div>
     </>

@@ -2,6 +2,12 @@ import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google';
 import './globals.css'
 
+import AuthContext from '@/contexts/AuthContext'
+import { SignUpModal } from '@/components/modal/SignUpModal';
+import { SignInModal } from '@/components/modal/SignInModal';
+import ToasterContext from '@/contexts/ToasterContext'
+
+
 const font = Poppins({
   weight: ['400', '600'],
   style: ['normal', 'italic'],
@@ -19,9 +25,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
   return (
     <html lang="en">
-      <body className={font.className}>{children}</body>
+      <body className={font.className}>
+        <AuthContext>
+          <ToasterContext />
+          <SignUpModal/>
+          <SignInModal/>
+          <div>{children}</div>
+        </AuthContext>
+        
+      </body>
+
     </html>
   )
 }

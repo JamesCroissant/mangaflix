@@ -4,9 +4,10 @@ import CategoryButton from '@/components/manga/CategoryButton'
 import { MangaCard } from '@/components/manga/MangaCard'
 
 import { GetAllMangasParams, SearchParamProps } from '@/types';
-import { getAllMangas } from '@/lib/actions/manga.action';
+import { getAllMangas } from '@/lib/actions/filterManga';
 
 import { mangas } from '@/data/manga'
+import { getCurrentUser } from '@/lib/service/getCurrentUser'
 
 
 export default async function Home({ searchParams }: SearchParamProps) {
@@ -24,9 +25,11 @@ export default async function Home({ searchParams }: SearchParamProps) {
     sort,
   })
 
+  const currentUser = await getCurrentUser()
+
   return (
     <>
-      <Navbar />
+      <Navbar currentUser={currentUser}/>
       <main className="py-24">
         <Weekly 
           mangas={trendingMangas}
@@ -37,6 +40,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
             <MangaCard
               key={filterdManga.id}
               manga={filterdManga}
+              currentUser={currentUser}
             />
           ))}
         </div>
