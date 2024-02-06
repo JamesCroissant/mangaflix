@@ -3,7 +3,9 @@ import { MangaCard } from '@/components/manga/MangaCard'
 import ItemFilter from '@/components/filter/ItemFilter'
 
 import { GetAllMangasParams, SearchParamProps } from '@/types';
-import { getAllMangas } from '@/lib/actions/manga.action';
+import { getAllMangas } from '@/lib/actions/filterManga';
+
+import { getCurrentUser } from '@/lib/service/getCurrentUser'
 
 
 export default async function Search({ searchParams }: SearchParamProps) {
@@ -19,10 +21,12 @@ export default async function Search({ searchParams }: SearchParamProps) {
     category,
     sort,
   })
+
+  const currentUser = await getCurrentUser()
   
   return (
     <>
-      <Navbar />
+      <Navbar currentUser={currentUser}/>
       <main className="py-24">
         <div>
           <ItemFilter />
@@ -32,6 +36,7 @@ export default async function Search({ searchParams }: SearchParamProps) {
             <MangaCard
               key={manga.id}
               manga={manga}
+              currentUser={currentUser}
             />
           ))}
         </div>
