@@ -37,13 +37,10 @@ export function MangaCard({ manga, currentUser }: MangaCardProps) {
                 { manga.title }
               </div>
               <div>
-                { currentUser ? 
-                  <FavoriteButton
-                    mangaId={manga.id}
-                    currentUser={currentUser}
-                  />
-                  : null
-                }
+                <FavoriteButton
+                  mangaId={manga.id}
+                  currentUser={currentUser}
+                />
               </div>
               <div className="flex gap-x-3">
                 <div className={`flex items-center text-gray-500 gap-x-1.5 ${manga.title.length >= 15 ? "text-sm" : "text-xs"}`}>

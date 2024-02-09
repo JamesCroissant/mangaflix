@@ -8,6 +8,7 @@ import { SafeUser } from "@/types";
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 
+import useSignInModal from "@/hooks/useSignInModal";
 import { toggleFavoriteManga } from "@/lib/actions/favoriteManga";
 
 
@@ -22,6 +23,7 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   currentUser,
 }) => {
   const router = useRouter();
+  const loginModal = useSignInModal();
   const isFavorite = currentUser?.favoriteIds.some(
     (favoriteId: number) => favoriteId === mangaId
   );
@@ -30,6 +32,10 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   const handleFavorite = async () => {
     if (!mangaId || typeof mangaId !== 'number') {
       throw new Error('Invalid ID');
+    }
+
+    if (!currentUser) {
+      return loginModal.onOpen();
     }
 
     try {

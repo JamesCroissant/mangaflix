@@ -36,7 +36,6 @@ export const toggleFavoriteManga = async ({ currentUser, mangaId }: FavoriteMang
         favoriteIds: updatedFavoriteIds,
       },
     });
-    console.log(`Manga ${isAlreadyFavorite ? 'removed from' : 'added to'} favorites successfully`);
   } catch (error) {
     console.error('Failed to toggle manga in favorites:', error);
     throw new Error("Error")
