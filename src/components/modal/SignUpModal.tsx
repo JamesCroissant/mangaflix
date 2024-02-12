@@ -24,7 +24,7 @@ import { Separator } from "@/components/ui/separator"
 
 import useSignUpModal from '@/hooks/useSignUpModal'
 import useSignInModal from "@/hooks/useSignInModal"
-import FormField from '../form/FormField'
+import { FormField } from '../form/FormField'
 import axios from 'axios'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
