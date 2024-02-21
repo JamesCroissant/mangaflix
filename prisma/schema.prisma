@@ -20,8 +20,7 @@ model User {
 
   mangas    Manga[]
   favorites Favorite[]
-  comments  Comment[]
-  ratings   Rating[]
+  reviews   Review[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -56,7 +55,7 @@ model Manga {
   description String?
   link        String?
   image       String?
-  volume      Int?
+  comment     String
 
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
@@ -66,8 +65,7 @@ model Manga {
   statuses   Status[]
 
   favorites Favorite[]
-  comments  Comment[]
-  ratings   Rating[]
+  reviews   Review[]
 
   user User @relation(fields: [userId], references: [id])
 }
@@ -82,19 +80,9 @@ model Favorite {
   createdAt DateTime @default(now())
 }
 
-model Rating {
+model Review {
   id      String @id @default(cuid())
   score   Int
-  userId  String
-  mangaId String
-
-  user      User     @relation(fields: [userId], references: [id])
-  manga     Manga    @relation(fields: [mangaId], references: [id])
-  createdAt DateTime @default(now())
-}
-
-model Comment {
-  id      String @id @default(cuid())
   content String
   userId  String
   mangaId String
