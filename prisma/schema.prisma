@@ -60,9 +60,9 @@ model Manga {
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 
-  genres     Genre[]
-  categories Category[]
-  statuses   Status[]
+  genre    Genre
+  category Category
+  status   Status
 
   favorites Favorite[]
   reviews   Review[]
@@ -98,7 +98,7 @@ enum Genre {
 }
 
 enum Category {
-  SCIENCE_FICTION
+  SF
   FANTASY
   ROMANCE
   COMEDY
