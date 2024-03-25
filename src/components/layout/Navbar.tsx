@@ -16,7 +16,7 @@ type NavbarProps = {
   currentUser?: SafeUser | null;
 };
 
-const Navbar = ({ currentUser }: NavbarProps) => {
+export const Navbar = ({ currentUser }: NavbarProps) => {
   const router = useRouter();
   const currentPath = usePathname();
   const loginModal = useSignInModal();
@@ -59,5 +59,3 @@ const Navbar = ({ currentUser }: NavbarProps) => {
     </>
   )
 }
-
-export default Navbar
