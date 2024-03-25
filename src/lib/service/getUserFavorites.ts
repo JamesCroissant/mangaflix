@@ -1,19 +1,35 @@
-'use server';
+'use server'
 
-import { mangas } from '@/data/manga';
-import { getCurrentUser } from '@/lib/service/getCurrentUser';
+import prisma from '@/lib/prisma';
+import { getCurrentUser } from '@/lib/service/getCurrentUser'
 
 export async function getUserFavorites() {
   try {
     const currentUser = await getCurrentUser();
-    const userFavoriteIds = currentUser.favoriteIds;
 
     if (!currentUser) {
       throw new Error('User not found');
     }
 
-    const userFavorites = mangas.filter(manga => userFavoriteIds.includes(manga.id));
-    return userFavorites
+    const favoriteIds = currentUser.favorites.map(
+      (favorite) => favorite.mangaId
+    );
+
+    const favorites = await prisma.manga.findMany({
+      where: {
+        id: {
+          in: [...favoriteIds],
+        },
+      },
+    });
+    
+    const safeFavorites = favorites.map((favorite) => ({
+      ...favorite,
+      createdAt: favorite.createdAt?.toISOString(),
+      updatedAt: favorite.updatedAt?.toISOString() || null,
+    }));
+
+    return safeFavorites;
 
   } catch (error) {
     console.error(error);
