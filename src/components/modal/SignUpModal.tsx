@@ -20,21 +20,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
 import { Separator } from "@/components/ui/separator"
+import { Input } from "../ui/input"
 
 import useSignUpModal from '@/hooks/useSignUpModal'
 import useSignInModal from "@/hooks/useSignInModal"
-import { FormField } from '../form/FormField'
 import axios from 'axios'
-import * as z from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-
-
-const schema = z.object({
-  name: z.string().min(2, { message: 'At least 2 characters must be entered'}),
-  email: z.string() .email({ message: 'Not in the form of an email.' }),
-  password: z.string() .min(6, { message: 'At least 2 characters must be entered'})
-})
+import { SignUpSchema, signUpResolver } from '@/schema/signup';
 
 
 export function SignUpModal() {
@@ -43,27 +44,24 @@ export function SignUpModal() {
   const signInModal = useSignInModal()
   const [isLoading, setIsLoading] = useState(false)
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FieldValues>({
-    defaultValues: { name: '', email: '', password: ''},
-    resolver: zodResolver(schema),
+
+  const form = useForm<SignUpSchema>({
+    defaultValues: { name:'', email: '', password: ''},
+    resolver: signUpResolver,
   })
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  const onSubmit = async (formData: SignUpSchema) => {
     setIsLoading(true);
     try {
       // signup
-      const res = await axios.post('/api/signup', data)
+      const res = await axios.post('/api/signup', formData)
 
       if (res.status === 200) {
         toast.success('created your account')
 
         // login
         await signIn('credentials', {
-          ...data,
+          ...formData,
           redirect: false,
         })
 
@@ -100,40 +98,55 @@ export function SignUpModal() {
           </DialogHeader>
           <Separator className='' />
 
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid gap-4 py-4">
-              <FormField
-                id="name" 
-                label="Name" 
-                type="name" 
-                name="name" 
-                register={register} 
-                required
-                errors
-              />
-              <FormField
-                id="email" 
-                label="Email" 
-                type="email" 
-                name="email" 
-                register={register} 
-                required
-                errors
-              />
-              <FormField
-                id="password" 
-                label="Password" 
-                type="password" 
-                name="password" 
-                register={register} 
-                required
-                errors
-              />
-              <Button type="submit" className="mt-4 bg-orange-600 hover:opacity-85 hover:bg-orange-600">
-                Sign Up
-              </Button>
-            </div>
-          </form>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <div className="grid gap-4 py-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm md:text-base">Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="hamham" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm md:text-base">Email</FormLabel>
+                      <FormControl>
+                        <Input placeholder="sample@gmail.com" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm md:text-base">Password</FormLabel>
+                      <FormControl>
+                        <Input placeholder="123456" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" className="mt-4 bg-orange-600 hover:opacity-85 hover:bg-orange-600">
+                  Sign Up
+                </Button>
+              </div>
+            </form>
+          </Form>
+          
    
           <div className="flex items-center justify-between">
             <Separator className='w-[42%]' />

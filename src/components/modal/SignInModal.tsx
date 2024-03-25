@@ -20,20 +20,23 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
 import { Separator } from "@/components/ui/separator"
+import { Input } from "../ui/input"
 
 import useSignUpModal from '@/hooks/useSignUpModal'
 import useSignInModal from "@/hooks/useSignInModal"
-import { FormField } from '../form/FormField'
 
-import * as z from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { SignInSchema, signInResolver } from "@/schema/signin"
 
-
-const schema = z.object({
-  email: z.string() .email({ message: 'Not in the form of an email.' }),
-  password: z.string() .min(6, { message: 'At least 2 characters must be entered'})
-})
 
 export function SignInModal() {
   const router = useRouter()
@@ -41,32 +44,27 @@ export function SignInModal() {
   const signInModal = useSignInModal();
   const [isLoading, setIsLoading] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FieldValues>({
+  const form = useForm<SignInSchema>({
     defaultValues: { email: '', password: ''},
-    resolver: zodResolver(schema),
+    resolver: signInResolver,
   })
 
-
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    setIsLoading(true)
+  const onSubmit = async (formData: SignInSchema) => {
+    setIsLoading(true) 
     try {
       // login
       const res = await signIn('credentials', {
-        ...data,
+        ...formData,
         redirect: false,
       })
 
       if (res?.error) {
         toast.error('An error has occurred.' + res.error)
+      } else {
+        toast.success("You are logged in")
+        toggleSignInModal();
+        router.refresh()
       }
-
-      toast.success("You are logged in")
-      toggleSignInModal();
-      router.refresh()
 
     } catch (error) {
       toast.error("An error has occurred." + error)
@@ -98,31 +96,43 @@ export function SignInModal() {
         </DialogHeader>
         <Separator className='' />
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid gap-4 py-4">
-            <FormField
-              id="email" 
-              label="Email" 
-              type="email" 
-              name="email" 
-              register={register} 
-              required
-              errors
-            />
-            <FormField
-              id="password" 
-              label="Password" 
-              type="password" 
-              name="password" 
-              register={register} 
-              required
-              errors
-            />
-            <Button type="submit" className="mt-4 bg-orange-600 hover:opacity-85 hover:bg-orange-600">
-              Login
-            </Button>
-          </div>
-        </form>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="grid gap-4 py-4">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm md:text-base">Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="sample@gmail.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm md:text-base">Password</FormLabel>
+                    <FormControl>
+                      <Input placeholder="123456" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <Button type="submit" className="mt-4 bg-orange-600 hover:opacity-85 hover:bg-orange-600">
+                Login
+              </Button>
+            </div>
+          </form>
+        </Form>
+      
         <div className="flex items-center justify-between">
           <Separator className='w-[42%]' />
             <p>or</p>
