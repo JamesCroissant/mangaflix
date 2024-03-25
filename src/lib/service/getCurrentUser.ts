@@ -3,13 +3,9 @@ import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 
 
-export async function getSession() {
-  return await getServerSession(authOptions);
-}
-
-export async function getCurrentUser() {
+export const getCurrentUser = async () => {
   try {
-    const session = await getSession();
+    const session = await getServerSession(authOptions);
 
     if (!session || !session.user?.email) {
       return null
@@ -57,6 +53,7 @@ export async function getCurrentUser() {
       updatedAt: currentUser.updatedAt?.toISOString() || null,
       emailVerified: currentUser.emailVerified?.toISOString() || null,
     };
+
   } catch (error) {
     return null
   }
