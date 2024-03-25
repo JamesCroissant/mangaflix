@@ -15,18 +15,42 @@ export const getCurrentUser = async () => {
       where: {
         email: session.user.email,
       },
+      include: {
+        mangas: true,
+        favorites: true,
+        reviews: true
+      },
     })
 
     if (!currentUser) {
       return null
     }
 
+    const safeManga = currentUser.mangas.map((manga) => ({
+      ...manga,
+      createdAt: manga.createdAt?.toISOString(),
+      updatedAt: manga.updatedAt?.toISOString() || null,
+    }));
+
+    const safeFavorite = currentUser.favorites.map((favorite) => ({
+      ...favorite,
+      createdAt: favorite.createdAt?.toISOString(),
+    }));
+
+    const safeReview = currentUser.reviews.map((review) => ({
+      ...review,
+      createdAt: review.createdAt?.toISOString(),
+    }));
+
+    const { hashedPassword, ...rest } = currentUser;
     return {
-      ...currentUser,
-      createdAt: currentUser.createdAt.toISOString(),
-      updatedAt: currentUser.updatedAt.toISOString(),
-      emailVerified: 
-        currentUser.emailVerified?.toISOString() || null,
+      ...rest,
+      mangas: safeManga,
+      favorites: safeFavorite,
+      reviews: safeReview,
+      createdAt: currentUser.createdAt?.toISOString(),
+      updatedAt: currentUser.updatedAt?.toISOString() || null,
+      emailVerified: currentUser.emailVerified?.toISOString() || null,
     };
     
   } catch (error) {
