@@ -2,21 +2,21 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'
 
-import { FiSearch } from "react-icons/fi";
-import { HiOutlinePencilAlt } from "react-icons/hi";
-import { UserMenu } from '@/components/layout/UserMenu';
+import { FiSearch } from "react-icons/fi"
+import { HiOutlinePencilAlt } from "react-icons/hi"
+import { UserMenu } from '@/components/layout/UserMenu'
 
-import { SafeUser } from "@/types/user";
-import useSignInModal from "@/hooks/useSignInModal";
+import { SafeUser } from "@/types/user"
+import useSignInModal from "@/hooks/useSignInModal"
 
 
-type navbarProps = {
+type NavbarProps = {
   currentUser?: SafeUser | null;
 };
 
-const Navbar = ({ currentUser }: navbarProps) => {
+const Navbar = ({ currentUser }: NavbarProps) => {
   const router = useRouter();
   const currentPath = usePathname();
   const loginModal = useSignInModal();
