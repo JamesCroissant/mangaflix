@@ -164,7 +164,7 @@ export function SignUpModal() {
               Sign Up with Google
             </Button>
             <div className='flex items-center justify-center mt-8 gap-x-2.5 text-sm text-neutral-500'>
-              <p>Don't have an account yet?</p>
+              <p>Don&apos;t have an account yet?</p>
               <button
                 className='text-neutral-800 cursor-pointer hover:underline'
                 onClick={toggleModal}

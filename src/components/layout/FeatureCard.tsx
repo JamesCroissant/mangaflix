@@ -10,7 +10,7 @@ export const FeatureCard = () => {
       <div className="w-full h-full bg-rose-50 text-white p-6 rounded-lg shadow-lg transition duration-300 ease-in-out hover:scale-105">
         <FaBookmark className="w-10 h-10 fill-orange-500 mb-4"/>
         <div className="text-black text-lg mb-2 font-semibold">Track Your Manga Favorites -</div>
-        <div className="text-black">Record the titles, authors, and your reviews of the manga you've read. </div>
+        <div className="text-black">Record the titles, authors, and your reviews of the manga you&apos;ve read. </div>
       </div>
       <div className="w-full h-full bg-rose-50 text-white p-6 rounded-lg shadow-lg transition duration-300 ease-in-out hover:scale-105">
         <FiSearch className="w-10 h-10 text-orange-500 mb-4"/>

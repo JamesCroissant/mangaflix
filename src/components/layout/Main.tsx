@@ -50,7 +50,7 @@ export const Main = ({ currentUser }: MainProps) => {
           )}
         </div>
         <FeatureCard />
-        <div className="mt-4 mb-10 text-xl">Let"s discover your favorite manga!</div>
+        <div className="mt-4 mb-10 text-xl">Let&apos;s discover your favorite manga!</div>
         <Button
           variant='outline'
           onClick={handleClick}

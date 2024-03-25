@@ -27,7 +27,7 @@ export const ReviewForm = ({ onSubmit, form }: ReviewFormProps) => {
 
   const handleRating = useCallback((rate: number) => {
     setValue('rating', rate);
-  }, []);
+  }, [setValue]);
 
   return (
     <>
