@@ -1,11 +1,6 @@
 import * as z from 'zod';
 import { Genre, Category, Status } from '@prisma/client';
 
-// const imageSchema = z.union([
-//   z.instanceof(File),
-//   z.string().url().nullable(),
-// ]);
-
 export const mangaSchema = z.object({
   title: z.string()
     .min(1, { message: 'Title is required' })
@@ -20,8 +15,6 @@ export const mangaSchema = z.object({
     .url({ message: 'Link must be a valid URL' })
     .optional(),
   image: z.string().url().optional().nullable(),
-  // image: imageSchema.optional(),
-  // image: z.instanceof(File).nullable().or(z.string().url()),
   genre: z.union([
     z.literal(Genre['BOYS_COMIC']),
     z.literal(Genre['GIRLS_COMIC']),
