@@ -3,6 +3,7 @@ import { CreatePostForm } from '@/components/form/CreatePostForm';
 import { Navbar } from '@/components/layout/Navbar';
 
 import { getCurrentUser } from '@/lib/service/getCurrentUser'
+import { Footer } from '@/components/layout/Footer';
 
 
 export default async function createPost() {
@@ -10,14 +11,15 @@ export default async function createPost() {
 
   return (
     <>
-      <Navbar currentUser={currentUser}/>
-      <main className="py-24">
-        <div className="">
-          <ClientOnly>
+      <ClientOnly>
+        <Navbar currentUser={currentUser}/>
+        <main className="py-24">
+          <div className="">
             <CreatePostForm />
-          </ClientOnly>
-        </div>
-      </main>
+          </div>
+        </main>
+        <Footer />
+      </ClientOnly>
     </>
 
   );
