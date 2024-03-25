@@ -1,9 +1,7 @@
 'use client';
 
-import { useCallback, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
 
 import { FavoriteButton } from './FavoriteButton';
 import { Stars } from './Stars';
@@ -15,7 +13,6 @@ import {
 } from "@/components/ui/avatar"
 import { Badge } from '@/components/ui/badge';
 import { Button } from "@/components/ui/button";
-import { Input } from '@/components/ui/input';
 
 import { FaUser } from "react-icons/fa6";
 
