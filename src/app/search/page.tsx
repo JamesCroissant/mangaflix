@@ -1,4 +1,5 @@
-import Navbar from '@/components/layout/Navbar'
+import { Navbar } from '@/components/layout/Navbar'
+import { Footer } from '@/components/layout/Footer'
 import { MangaCard } from '@/components/manga/MangaCard'
 import ItemFilter from '@/components/filter/ItemFilter'
 
@@ -6,6 +7,7 @@ import { SearchParamProps } from '@/types/manga';
 import { getFilteredMangas } from '@/lib/actions/filterManga';
 
 import { getCurrentUser } from '@/lib/service/getCurrentUser'
+
 
 
 export default async function Search({ searchParams }: SearchParamProps) {
@@ -28,9 +30,7 @@ export default async function Search({ searchParams }: SearchParamProps) {
     <>
       <Navbar currentUser={currentUser}/>
       <main className="py-24">
-        <div>
-          <ItemFilter />
-        </div>
+        <ItemFilter />
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-8 gap-x-2">
           {mangas.map((manga) => (
             <MangaCard
@@ -41,6 +41,7 @@ export default async function Search({ searchParams }: SearchParamProps) {
           ))}
         </div>
       </main>
+      <Footer />
     </>
   )
 }

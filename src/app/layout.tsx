@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google';
+import { Poppins } from 'next/font/google'
 import './globals.css'
 
 import AuthContext from '@/contexts/AuthContext'
-import { SignUpModal } from '@/components/modal/SignUpModal';
-import { SignInModal } from '@/components/modal/SignInModal';
+import { SignUpModal } from '@/components/modal/SignUpModal'
+import { SignInModal } from '@/components/modal/SignInModal'
 import ToasterContext from '@/contexts/ToasterContext'
+
 
 
 const font = Poppins({
@@ -35,9 +36,7 @@ export default function RootLayout({
           <SignInModal/>
           <div>{children}</div>
         </AuthContext>
-        
       </body>
-
     </html>
   )
 }

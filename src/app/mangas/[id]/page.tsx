@@ -1,5 +1,5 @@
 import { EmptyResult } from '@/components/layout/EmptyResult';
-import Navbar from '@/components/layout/Navbar'
+import { Navbar } from '@/components/layout/Navbar'
 import { MangaDetailCard } from '@/components/manga/MangaDetailCard'
 
 import { getCurrentUser } from '@/lib/service/getCurrentUser'

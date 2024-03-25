@@ -1,6 +1,6 @@
 import { ClientOnly } from '@/components/layout/ClientOnly';
 import { CreatePostForm } from '@/components/form/CreatePostForm';
-import Navbar from '@/components/layout/Navbar';
+import { Navbar } from '@/components/layout/Navbar';
 
 import { getCurrentUser } from '@/lib/service/getCurrentUser'
 
