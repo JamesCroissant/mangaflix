@@ -1,43 +1,46 @@
 'use server';
 
-import { SafeUser } from "@/types";
+import { SafeUser } from "@/types/user";
 import prisma from '@/lib/prisma';
+import { getCurrentUser } from '@/lib/service/getCurrentUser';
 
 type FavoriteMangaParams = {
   currentUser?: SafeUser | null
-  mangaId: number;
+  mangaId: string;
 }
 
-export const toggleFavoriteManga = async ({ currentUser, mangaId }: FavoriteMangaParams) => {
+
+export const addFavoriteManga = async ({ currentUser, mangaId }: FavoriteMangaParams) => {
   try {
-    const user = await prisma.user.findUnique({
-      where: {
-        id: currentUser?.id,
-      },
-    });
-    if (!user) {
-      throw new Error('User not found');
+    if (!currentUser) {
+      throw new Error('Not authenticated');
     }
 
-    const isAlreadyFavorite = user.favoriteIds.includes(mangaId);
-
-    let updatedFavoriteIds;
-    if (!isAlreadyFavorite) {
-      updatedFavoriteIds = [...user.favoriteIds, mangaId];
-    } else {
-      updatedFavoriteIds = user.favoriteIds.filter((id: number) => id !== mangaId);
-    }
-
-    await prisma.user.update({
-      where: {
-        id: currentUser?.id,
-      },
+    await prisma.favorite.create({
       data: {
-        favoriteIds: updatedFavoriteIds,
+        userId: currentUser.id,
+        mangaId,
       },
     });
   } catch (error) {
-    console.error('Failed to toggle manga in favorites:', error);
-    throw new Error("Error")
+    throw new Error('Failed to add manga to favorites');
   }
-}
+};
+
+export const deleteFavoriteManga = async (favoriteId: string) => {
+  try {
+    const currentUser = await getCurrentUser();
+
+    if (!currentUser) {
+      throw new Error('Not authenticated');
+    }
+
+    await prisma.favorite.delete({
+      where: {
+        id: favoriteId,
+      },
+    });
+  } catch (error) {
+    throw new Error('Failed to delete manga from favorites');
+  }
+};
