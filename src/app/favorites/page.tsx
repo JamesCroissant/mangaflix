@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import { EmptyResult } from '@/components/layout/EmptyResult';
 import Navbar from '@/components/layout/Navbar'
 import { MangaCard } from '@/components/manga/MangaCard'
@@ -6,9 +7,13 @@ import { getCurrentUser } from '@/lib/service/getCurrentUser'
 import { getUserFavorites } from '@/lib/service/getUserFavorites';
 
 
-export default async function Favorite() {
+export default async function Favorites() {
   const favoriteMangas = await getUserFavorites();
   const currentUser = await getCurrentUser();
+
+  if (!currentUser) {
+    redirect('/login');
+  }
 
   if (favoriteMangas.length === 0) {
     return (
