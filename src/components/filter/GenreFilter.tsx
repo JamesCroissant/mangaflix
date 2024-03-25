@@ -3,7 +3,7 @@
 import * as React from "react"
 import { useSearchParams, useRouter } from 'next/navigation';
 
-import { genres } from "@/data/manga";
+import { genreLabels } from "@/constants/manga";
 
 import {
   Select,
@@ -38,6 +38,7 @@ export const GenreFilter = () => {
       router.push(newUrl, { scroll: false });
   }
 
+
   return (
     <>
       <Select onValueChange={(value: string) => onSelectGenre(value)}>
@@ -47,13 +48,15 @@ export const GenreFilter = () => {
         <SelectContent>
           <SelectGroup>
             <SelectItem value="All" className="">All</SelectItem>
-            {genres.length > 0 && genres.map((genre, index) => (
-              <SelectItem
-                key={index}
-                value={genre}
-              >
-                {genre}
-              </SelectItem>
+            {
+              Object.entries(genreLabels).length > 0 &&
+              Object.entries(genreLabels).map(([key, value]) => (
+                <SelectItem
+                  key={key}
+                  value={key}
+                >
+                  {value}
+                </SelectItem>
             ))}
           </SelectGroup>
         </SelectContent>

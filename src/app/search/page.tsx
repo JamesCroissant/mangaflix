@@ -2,8 +2,8 @@ import Navbar from '@/components/layout/Navbar'
 import { MangaCard } from '@/components/manga/MangaCard'
 import ItemFilter from '@/components/filter/ItemFilter'
 
-import { GetAllMangasParams, SearchParamProps } from '@/types';
-import { getAllMangas } from '@/lib/actions/filterManga';
+import { SearchParamProps } from '@/types/manga';
+import { getFilteredMangas } from '@/lib/actions/filterManga';
 
 import { getCurrentUser } from '@/lib/service/getCurrentUser'
 
@@ -15,7 +15,7 @@ export default async function Search({ searchParams }: SearchParamProps) {
   const sort = (searchParams?.sort as string) || '';
 
 
-  const mangas = await getAllMangas({
+  const mangas = await getFilteredMangas({
     query: keywordText,
     genre,
     category,

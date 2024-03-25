@@ -3,7 +3,7 @@
 import * as React from "react"
 import { useSearchParams, useRouter } from 'next/navigation';
 
-import { categories } from "@/data/manga";
+import { categoryLabels } from "@/constants/manga";
 
 import {
   Select,
@@ -49,13 +49,15 @@ export const CategoryFilter = () => {
         <SelectContent>
           <SelectGroup>
             <SelectItem value="All">All</SelectItem>
-            {categories.length > 0 && categories.map((category, index) => (
-              <SelectItem
-                key={index}
-                value={category}
-              >
-                {category}
-              </SelectItem>
+            {
+              Object.entries(categoryLabels).length > 0 &&
+              Object.entries(categoryLabels).map(([key, value]) => (
+                <SelectItem
+                  key={key}
+                  value={key}
+                >
+                  {value}
+                </SelectItem>
             ))}
           </SelectGroup>
         </SelectContent>

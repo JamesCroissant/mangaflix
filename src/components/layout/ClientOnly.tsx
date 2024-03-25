@@ -6,7 +6,7 @@ type ClientOnlyProps = {
   children: React.ReactNode;
 };
 
-export const ClientWrapper: React.FC<ClientOnlyProps> = ({ children }) => {
+export const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {

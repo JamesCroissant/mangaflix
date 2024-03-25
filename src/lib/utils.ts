@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge"
 
 import qs from 'query-string'
 
-import { RemoveUrlQueryParams, UrlQueryParams } from '@/types'
+import { RemoveUrlQueryParams, UrlQueryParams } from '@/types/manga'
 
 
 export function cn(...inputs: ClassValue[]) {

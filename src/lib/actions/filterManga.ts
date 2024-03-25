@@ -1,13 +1,17 @@
 'use server'
 
-import { mangas } from '@/data/manga';
+import { GetAllMangasParams } from '@/types/manga'
+import { getMangas } from '../service/getMangas';
 
-import { GetAllMangasParams } from '@/types'
 
-
-export async function getAllMangas({ query, genre, category, sort }: GetAllMangasParams) {
+export async function getFilteredMangas({ 
+  query, 
+  genre, 
+  category, 
+  sort
+}: GetAllMangasParams) {
   try {
-    let filteredManga = mangas;
+    let filteredManga = await getMangas();
 
     // keyword
     if (query) {
@@ -20,10 +24,8 @@ export async function getAllMangas({ query, genre, category, sort }: GetAllManga
     }
 
     // category
-    if (category === 'popular' || category === 'trending') {
+    if (category) {
       filteredManga = filteredManga.filter(manga => manga.category.toLowerCase() === category);
-    } else if (category === 'ranking') {
-      filteredManga = filteredManga.sort((a, b) => b.rating - a.rating);
     }
 
     // sorting

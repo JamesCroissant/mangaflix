@@ -82,8 +82,8 @@ model Favorite {
 
 model Review {
   id      String @id @default(cuid())
-  score   Int
-  content String
+  rating  Int
+  comment String
   userId  String
   mangaId String
 

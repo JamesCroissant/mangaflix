@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import { signOut } from "next-auth/react";
 
 import { toast } from 'react-hot-toast'
@@ -23,7 +23,7 @@ import {
 import useSignUpModal from '@/hooks/useSignUpModal'
 import useSignInModal from "@/hooks/useSignInModal"
 
-import { SafeUser } from '@/types'
+import { SafeUser } from '@/types/user'
 
 type userMenuProps = {
   currentUser?: SafeUser | null;

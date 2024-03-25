@@ -26,7 +26,7 @@ export const SortField = () => {
         newUrl = formUrlQuery({
           params: searchParams.toString(),
           key: 'sort',
-          value: sortOrder
+          value: sortOrder.toLowerCase()
         })
       } else {
         newUrl = removeKeysFromQuery({
