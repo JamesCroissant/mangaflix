@@ -1,7 +1,7 @@
 # Manga Flix
 
-This app is full-stack app for sharing your favorite manga between users.
-It allows you to post, search and review various mangas on app.
+This application is for sharing your favorite manga you want to read.
+It is a full-stack application with user authentication, CRUD function, and can be searching and filtering manga, adding to favorite list, comment review.
 
 ![screencapture-localhost-3000-2024-02-23-11_57_51](https://github.com/JamesCroissant/mangaflix/blob/main/public/images/mangaflix.png)
 
