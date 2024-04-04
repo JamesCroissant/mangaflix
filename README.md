@@ -3,7 +3,7 @@
 This app is full-stack app for sharing your favorite manga between users.
 It allows you to post, search and review various mangas on app.
 
-![screencapture-localhost-3000-2024-02-23-11_57_51](https://github.com/ka/recipe-app/assets/66394413/6633928b-6a52-4c18-a9d3-5a7ae898f941)
+![screencapture-localhost-3000-2024-02-23-11_57_51](https://github.com/JamesCroissant/mangaflix/blob/main/public/images/mangaflix.png)
 
 ## Features
 
